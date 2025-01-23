@@ -1,3 +1,91 @@
-body {
+/* IMPORT */
+
+@font-face {
+    font-family: "Flexo-Demi";
+    src: url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.eot");
+    src: url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.svg#Flexo-Demi")format("svg");
+}
+
+@font-face {
+    font-family: "Flexo-Bold";
+    src: url("https://db.onlinewebfonts.com/t/6e1ef15c406d6f6aca64916d713fae18.eot");
+    src: url("https://db.onlinewebfonts.com/t/6e1ef15c406d6f6aca64916d713fae18.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/6e1ef15c406d6f6aca64916d713fae18.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/6e1ef15c406d6f6aca64916d713fae18.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/6e1ef15c406d6f6aca64916d713fae18.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/6e1ef15c406d6f6aca64916d713fae18.svg#Flexo-Bold")format("svg");
+}
+
+@font-face {
+    font-family: "Flexo-Medium";
+    src: url("https://db.onlinewebfonts.com/t/d2d21cf0ee4c1d969d8a4dccc587ab26.eot");
+    src: url("https://db.onlinewebfonts.com/t/d2d21cf0ee4c1d969d8a4dccc587ab26.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/d2d21cf0ee4c1d969d8a4dccc587ab26.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/d2d21cf0ee4c1d969d8a4dccc587ab26.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/d2d21cf0ee4c1d969d8a4dccc587ab26.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/d2d21cf0ee4c1d969d8a4dccc587ab26.svg#Flexo-Medium")format("svg");
+}
+
+
+/* GENERAL */
+
+:root {
+    --space-around: 5%;
+}
+
+.wrapper {
+    padding-left: var(--space-around);
+    padding-right: var(--space-around);
+}
+
+
+/* HOME-PAGE */
+
+.griglia-box {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    margin-top: 20px;
+}
+
+.scheda .immagine {
+    background-color: #F2F2F2;
+    border-radius: 5px
+}
+
+.scheda .immagine img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.scheda .info #number{
+    margin: 0;
+    color: #919191;
+    font-size: 80%;
+    padding-top: 2px;
+    font-family: "Flexo-Bold", arial, sans-serif;
+}
+
+.scheda .info #name {
     font-family: "Flexo-Demi", arial, sans-serif;
-} 
+    color: #313131;
+    text-transform: none;
+    font-size: 145%;
+    margin-bottom: 5px;
+}
+
+.scheda .info .abilita {
+    font-family: "Flexo-Medium", arial, sans-serif;
+    border-radius: 3px;
+    line-height: 18px;
+    max-width: 110px;
+    width: 37%;
+    font-size: 11px;
+    text-align: center;
+}

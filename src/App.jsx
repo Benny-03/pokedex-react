@@ -55,9 +55,9 @@ const Scheda = (props) => {
             <div className='immagine'>
                 <img src={props.image} alt={props.name} />
             </div>
-            <div className='info'>
-                <p>Numero: {props.number}</p>
-                <p>{props.name}</p>
+            <div className='info wrapper'>
+                <p id='number'>Numero: {props.number}</p>
+                <p id='name'>{props.name}</p>
                 <div className='abilita'>
                     {props.types.map((type) => {
                         return <span key={type}>{type}</span>
@@ -84,20 +84,18 @@ const App = () => {
         (async () => {
             const pokemonList = await fetchPokemonList();
             console.log(pokemonList);
+            const pokemon_urls = pokemonList.map((p) => p.url);
+            pokemon_urls.forEach(async (url) => {
+                const response = await fetch(url);
+                const data = await response.json();
+                console.log(data);
+            });
         })();
     }, []);
 
     return (
-        // <div>
-        //     {count} <button onClick={() => {
-        //         setCount(count + 1)
-        //     }
-        //     }>
-        //         +
-        //     </button>
-        // </div>
-        <div className='home-page'>
-            <div className='griglia-tot'>
+        <div className='home-page wrapper'>
+            <div className='griglia-box'>
                 {pokemon.map((p) =>  
                     <Scheda
                         key={p.number}
