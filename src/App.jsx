@@ -1,53 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import backgroundColorType from './typeBackground';
 
-const pokemon = [
-    {
-        name: 'Bulbasaur',
-        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
-        types: ['Grass', 'Poison'],
-        number: '001'
-    },
-    {
-        name: 'Charmander',
-        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
-        types: ['Fire'],
-        number: '004'
+const fetchPokemonList = async () => {
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=20');
+    const data = await response.json();
+    return data.results;
+}
 
-    },
-    {
-        name: 'Squirtle',
-        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png',
-        types: ['Water'],
-        number: '007'
-
-    },
-    {
-        name: 'Pikachu',
-        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
-        types: ['Electric'],
-        number: '025'
-
-    },
-    {
-        name: 'Jigglypuff',
-        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png',
-        types: ['Normal', 'Fairy'],
-        number: '039'
-
-    },
-    {
-        name: 'Meowth',
-        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/52.png',
-        types: ['Normal'],
-        number: '052'
-    },
-    {
-        name: 'Psyduck',
-        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png',
-        types: ['Water'],
-        number: '054'
-    }
-]
+const fetchPokemon = async (url) => {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+}
 
 const Scheda = (props) => {
     return (
@@ -60,7 +24,7 @@ const Scheda = (props) => {
                 <p id='name'>{props.name}</p>
                 <div className='abilita'>
                     {props.types.map((type) => {
-                        return <span key={type}>{type}</span>
+                        return backgroundColorType(type);
                     })}
                 </div>
             </div>
@@ -68,46 +32,62 @@ const Scheda = (props) => {
     )
 }
 
-const fetchPokemonList = async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon');
-    const data = await response.json();
-    return data.results;
-}
+
 
 const App = () => {
-    // const result = useState(0);
-    // const count = result[0];
-    // const setCount = result[1];
-    const [count, setCount] = useState(0);
+    const [pokemon, setPokemon] = useState([]);
+    const [type, setType] = useState([]);
+    const [offset, setOffset] = useState(0);
 
     useEffect(() => {
         (async () => {
+            //prendo la lista dei primi 20 pokemon
             const pokemonList = await fetchPokemonList();
-            console.log(pokemonList);
+
+            //prendo gli url singoli dei pokemon
             const pokemon_urls = pokemonList.map((p) => p.url);
-            pokemon_urls.forEach(async (url) => {
-                const response = await fetch(url);
-                const data = await response.json();
-                console.log(data);
+
+            const pokemonData = []
+            await Promise.all(
+                pokemon_urls.map(async (url) => {
+                    const pokemon = await fetchPokemon(url);
+                    pokemonData.push(pokemon);
+                })
+            )
+            pokemonData.sort((a, b) => a.id - b.id);
+            setPokemon(pokemonData);
+
+
+            const typeList = await fetchPokemon('https://pokeapi.co/api/v2/type/');
+            const typeData = typeList.results.map((type) => type.name);
+            const typeList1 = await fetchPokemon(typeList.next);
+            typeList1.results.forEach((type) => {
+                typeData.push(type.name);
             });
+
+            setType(typeData);
+
         })();
     }, []);
 
+    console.log(type)
     return (
-        <div className='home-page wrapper'>
+        <div className='home-page'>
             <div className='griglia-box'>
-                {pokemon.map((p) =>  
+                {pokemon.map((p) =>
                     <Scheda
-                        key={p.number}
+                        key={p.id}
                         name={p.name}
-                        image={p.image}
-                        types={p.types}
-                        number={p.number}
+                        image={p.sprites.other["official-artwork"].front_default}
+                        types={p.types.map((type) => type.type.name)}
+                        number={p.id}
                     />
                 )}
             </div>
+            <div className='box-button'>
+                <button className='add-pokemon'>Carica altri Pokemon</button>
+            </div>
         </div>
-
     );
 }
 
