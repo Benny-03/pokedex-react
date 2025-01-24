@@ -1,3 +1,3 @@
 ## Pokedex progetto react
 
-Pokedex UI for [pokeapi api](https://pokeapi.co/)
+Pokedex React UI for [pokeapi api](https://pokeapi.co/)
