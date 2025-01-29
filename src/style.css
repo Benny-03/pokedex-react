@@ -56,6 +56,11 @@
     margin-bottom: 100px;
 }
 
+.scheda {
+    cursor: pointer;
+    text-decoration: none;
+}
+
 .scheda .immagine {
     background-color: #F2F2F2;
     border-radius: 5px

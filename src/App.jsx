@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import backgroundColorType from './typeBackground';
+import SinglePokemon from './SinglePokemon';
 
-const fetchPokemonList = async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=20');
+const fetchPokemonList = async (offset, list) => {
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=' + offset + '&limit=20');
     const data = await response.json();
-    return data.results;
+    const newList = [...list, data.results];
+    return newList;
 }
 
 const fetchPokemon = async (url) => {
@@ -15,7 +19,7 @@ const fetchPokemon = async (url) => {
 
 const Scheda = (props) => {
     return (
-        <div className='scheda'>
+        <Link to='/single-pokemon' className='scheda'>
             <div className='immagine'>
                 <img src={props.image} alt={props.name} />
             </div>
@@ -28,7 +32,7 @@ const Scheda = (props) => {
                     })}
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
 
@@ -38,14 +42,25 @@ const App = () => {
     const [pokemon, setPokemon] = useState([]);
     const [type, setType] = useState([]);
     const [offset, setOffset] = useState(0);
+    const [list, setList] = useState([]);
+
+    const UploadPokemon = () => {
+        const newOffset = offset + 20;
+        setOffset(newOffset);
+    }
 
     useEffect(() => {
         (async () => {
-            //prendo la lista dei primi 20 pokemon
-            const pokemonList = await fetchPokemonList();
+            const pokemonList = await fetchPokemonList(offset, list);
+            setList(pokemonList);
 
             //prendo gli url singoli dei pokemon
-            const pokemon_urls = pokemonList.map((p) => p.url);
+            const pokemon_urls = [];
+            pokemonList.forEach((pokemon) => {
+                pokemon.map((p) => {
+                    pokemon_urls.push(p.url)
+                })
+            });
 
             const pokemonData = []
             await Promise.all(
@@ -68,26 +83,37 @@ const App = () => {
             setType(typeData);
 
         })();
-    }, []);
+    }, [offset]);
 
-    console.log(type)
+
+
+
     return (
-        <div className='home-page'>
-            <div className='griglia-box'>
-                {pokemon.map((p) =>
-                    <Scheda
-                        key={p.id}
-                        name={p.name}
-                        image={p.sprites.other["official-artwork"].front_default}
-                        types={p.types.map((type) => type.type.name)}
-                        number={p.id}
-                    />
-                )}
+        <>
+            <Router>
+                <Routes>
+                    <Route path="/single-pokemon" element={<SinglePokemon />} />
+                   
+                </Routes>
+            </Router>
+            <div className='home-page'>
+                <div className='griglia-box'>
+                    {console.log(pokemon)}
+                    {pokemon.map((p) =>
+                        <Scheda
+                            key={p.id}
+                            name={p.name}
+                            image={p.sprites.other["official-artwork"].front_default}
+                            types={p.types.map((type) => type.type.name)}
+                            number={p.id}
+                        />
+                    )}
+                </div>
+                <div className='box-button'>
+                    <button className='add-pokemon' onClick={UploadPokemon}>Carica altri Pokemon</button>
+                </div>
             </div>
-            <div className='box-button'>
-                <button className='add-pokemon'>Carica altri Pokemon</button>
-            </div>
-        </div>
+        </>
     );
 }
 

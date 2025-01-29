@@ -5,7 +5,6 @@ const backgroundColorType = (type) => {
     let first_color = '';
     let second_color = '';
 
-    console.log(type)
     switch (type) {
         case 'normal': first_color = '#a4acaf';
             second_color = '#a4acaf';
@@ -78,10 +77,9 @@ const backgroundColorType = (type) => {
         case 'stellar': first_color = '#cd5c5c';
             second_color = '#cd5c5c';
             break;
-        // case 'unknown': first_color = 'white';
-        //     second_color = 'white';
+        case 'unknown': first_color = 'white';
+            second_color = 'white';
     }
-    console.log(first_color)
     return <span key={type} className='single-type' style={{ backgroundImage: `linear-gradient(180deg, ${first_color} 50%, ${second_color} 50%)`, color: color_text }}>{type}</span>
 }
 
