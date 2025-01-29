@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { NavLink } from "react-router";
+// import { Link } from 'react-router-dom';
 import backgroundColorType from './typeBackground';
 import SinglePokemon from './SinglePokemon';
 
@@ -19,7 +20,7 @@ const fetchPokemon = async (url) => {
 
 const Scheda = (props) => {
     return (
-        <Link to='/single-pokemon' className='scheda'>
+        <NavLink to={'/single-pokemon/'+props.number} className='scheda'>
             <div className='immagine'>
                 <img src={props.image} alt={props.name} />
             </div>
@@ -32,7 +33,7 @@ const Scheda = (props) => {
                     })}
                 </div>
             </div>
-        </Link>
+        </NavLink>
     )
 }
 
@@ -86,34 +87,33 @@ const App = () => {
     }, [offset]);
 
 
-
+    /*
+                <Router>
+                    <Routes>
+                        <Route path="/single-pokemon" element={<SinglePokemon />} />
+                       
+                    </Routes>
+                </Router>
+    */
 
     return (
-        <>
-            <Router>
-                <Routes>
-                    <Route path="/single-pokemon" element={<SinglePokemon />} />
-                   
-                </Routes>
-            </Router>
-            <div className='home-page'>
-                <div className='griglia-box'>
-                    {console.log(pokemon)}
-                    {pokemon.map((p) =>
-                        <Scheda
-                            key={p.id}
-                            name={p.name}
-                            image={p.sprites.other["official-artwork"].front_default}
-                            types={p.types.map((type) => type.type.name)}
-                            number={p.id}
-                        />
-                    )}
-                </div>
-                <div className='box-button'>
-                    <button className='add-pokemon' onClick={UploadPokemon}>Carica altri Pokemon</button>
-                </div>
+        <div className='home-page'>
+            <div className='griglia-box'>
+                {console.log(pokemon)}
+                {pokemon.map((p) =>
+                    <Scheda
+                        key={p.id}
+                        name={p.name}
+                        image={p.sprites.other["official-artwork"].front_default}
+                        types={p.types.map((type) => type.type.name)}
+                        number={p.id}
+                    />
+                )}
             </div>
-        </>
+            <div className='box-button'>
+                <button className='add-pokemon' onClick={UploadPokemon}>Carica altri Pokemon</button>
+            </div>
+        </div>
     );
 }
 
