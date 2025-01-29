@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { NavLink } from "react-router";
-// import { Link } from 'react-router-dom';
 import backgroundColorType from './typeBackground';
-import SinglePokemon from './SinglePokemon';
 
 const fetchPokemonList = async (offset, list) => {
     const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=' + offset + '&limit=20');
@@ -20,7 +17,7 @@ const fetchPokemon = async (url) => {
 
 const Scheda = (props) => {
     return (
-        <NavLink to={'/single-pokemon/'+props.number} className='scheda'>
+        <NavLink to={'/single-pokemon/'+ props.number} className='scheda'>
             <div className='immagine'>
                 <img src={props.image} alt={props.name} />
             </div>
@@ -86,20 +83,9 @@ const App = () => {
         })();
     }, [offset]);
 
-
-    /*
-                <Router>
-                    <Routes>
-                        <Route path="/single-pokemon" element={<SinglePokemon />} />
-                       
-                    </Routes>
-                </Router>
-    */
-
     return (
         <div className='home-page'>
             <div className='griglia-box'>
-                {console.log(pokemon)}
                 {pokemon.map((p) =>
                     <Scheda
                         key={p.id}
