@@ -45,6 +45,27 @@
     padding: var(--space-around);
 }
 
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding-bottom: 10px;
+}
+
+.button {
+    transition: all 0.3s;
+}
+
+.button:hover{
+    transition: all 0.3s;
+}
+
 /* HOME-PAGE */
 
 .home-page {
@@ -131,7 +152,7 @@
     align-items: center;
 }
 
-.box-button .add-pokemon {
+.button {
     font-size: 100%;
     font-family: "Flexo-Demi", arial, sans-serif;
     border-radius: 5px;
@@ -144,7 +165,7 @@
     color: #fff;
 }
 
-.box-button .add-pokemon:hover {
+.button:hover {
     background-color: #1b82b1
 }
 
@@ -177,7 +198,7 @@
 }
 
 @media screen and (max-width: 310px){
-    .box-button .add-pokemon {
+    .button {
         line-height: 100%;
         padding: 13px 30px;
     }
@@ -186,6 +207,10 @@
 
 /* SINGLE-POKEMON */
 
+.box-button {
+    justify-content: flex-start;
+}
+
 .content-single-pokemon {
     display: flex;
     justify-content: center;
@@ -193,7 +218,7 @@
 }
 
 .single-pokemon {
-    max-width: 950px;
+    max-width: 1100px;
     width: 100%;
 }
 
@@ -313,4 +338,47 @@
     gap: 10px;
     font-size: 15px;
     padding-top: 10px;
+}
+
+#abilita .single-type {
+    justify-content: flex-start;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
+}
+
+.navigation .box-button {
+    width: auto;
+}
+
+.button.back {
+    background-color: #ee6b2f;
+    color: #fff;
+}
+
+.button.back:hover {
+    background-color: #da471b;
+}
+
+.button.prec, .button.succ {
+    background-color: #a4a4a4;
+}
+
+.button.prec:hover, .button.succ:hover {
+    background-color: #30a7d7;
+}
+
+.box-button.back {
+    justify-content: flex-end;
+    margin-top: 100px;
+    max-width: 1100px;
+}
+
+.table {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }

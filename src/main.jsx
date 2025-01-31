@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router";
 import App from './App';
-import SinglePokemon from './SinglePokemon';
+import SinglePokemon from './single-pokemon/SinglePokemon';
 
 const root = createRoot(document.getElementById('root'));
 

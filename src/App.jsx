@@ -85,7 +85,7 @@ const App = () => {
                 )}
             </div>
             <div className='box-button'>
-                <button className='add-pokemon' onClick={UploadPokemon}>Carica altri Pokemon</button>
+                <button className='button add-pokemon' onClick={UploadPokemon}>Carica altri Pokemon</button>
             </div>
         </div>
     );
