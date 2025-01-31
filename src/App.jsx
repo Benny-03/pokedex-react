@@ -17,7 +17,7 @@ const fetchPokemon = async (url) => {
 
 const Scheda = (props) => {
     return (
-        <NavLink to={'/single-pokemon/'+ props.number} className='scheda'>
+        <NavLink to={'/single-pokemon/'+ props.number } className='scheda'>
             <div className='immagine'>
                 <img src={props.image} alt={props.name} />
             </div>
@@ -25,9 +25,7 @@ const Scheda = (props) => {
                 <p id='number'>Numero: {props.number}</p>
                 <p id='name'>{props.name}</p>
                 <div className='abilita'>
-                    {props.types.map((type) => {
-                        return backgroundColorType(type);
-                    })}
+                    {props.types.map((type) => backgroundColorType(type))}
                 </div>
             </div>
         </NavLink>
@@ -69,16 +67,6 @@ const App = () => {
             )
             pokemonData.sort((a, b) => a.id - b.id);
             setPokemon(pokemonData);
-
-
-            const typeList = await fetchPokemon('https://pokeapi.co/api/v2/type/');
-            const typeData = typeList.results.map((type) => type.name);
-            const typeList1 = await fetchPokemon(typeList.next);
-            typeList1.results.forEach((type) => {
-                typeData.push(type.name);
-            });
-
-            setType(typeData);
 
         })();
     }, [offset]);
