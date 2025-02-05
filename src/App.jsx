@@ -5,7 +5,7 @@ import backgroundColorType from './typeBackground';
 const fetchPokemonList = async (offset, list) => {
     const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=' + offset + '&limit=20');
     const data = await response.json();
-    const newList = [...list, data.results];
+    const newList = [...list, ...data.results];
     return newList;
 }
 
@@ -16,16 +16,36 @@ const fetchPokemon = async (url) => {
 }
 
 const Scheda = (props) => {
-    return (
-        <NavLink to={'/single-pokemon/'+ props.number } className='scheda'>
+    const [pokemon, setPokemon] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            const pokemon = await fetchPokemon(props.url);
+            setPokemon(pokemon);
+        })();
+    }, [props.url]);
+
+    if (!pokemon) {
+
+        return(<div className='scheda loading'>
             <div className='immagine'>
-                <img src={props.image} alt={props.name} />
             </div>
             <div className='info wrapper'>
-                <p id='number'>Numero: {props.number}</p>
+                <p id='name'>{props.name}</p>
+            </div>
+        </div>)
+    }
+
+    return (
+        <NavLink to={'/single-pokemon/'+ pokemon.number } className='scheda'>
+            <div className='immagine'>
+                <img src={pokemon.sprites.other["official-artwork"].front_default} alt={props.name} />
+            </div>
+            <div className='info wrapper'>
+                <p id='number'>Numero: {pokemon.id}</p>
                 <p id='name'>{props.name}</p>
                 <div className='abilita'>
-                    {props.types.map((type) => backgroundColorType(type))}
+                    {pokemon.types.map((type) => backgroundColorType(type.type.name))}
                 </div>
             </div>
         </NavLink>
@@ -35,8 +55,6 @@ const Scheda = (props) => {
 
 
 const App = () => {
-    const [pokemon, setPokemon] = useState([]);
-    const [type, setType] = useState([]);
     const [offset, setOffset] = useState(0);
     const [list, setList] = useState([]);
 
@@ -49,38 +67,17 @@ const App = () => {
         (async () => {
             const pokemonList = await fetchPokemonList(offset, list);
             setList(pokemonList);
-
-            //prendo gli url singoli dei pokemon
-            const pokemon_urls = [];
-            pokemonList.forEach((pokemon) => {
-                pokemon.map((p) => {
-                    pokemon_urls.push(p.url)
-                })
-            });
-
-            const pokemonData = []
-            await Promise.all(
-                pokemon_urls.map(async (url) => {
-                    const pokemon = await fetchPokemon(url);
-                    pokemonData.push(pokemon);
-                })
-            )
-            pokemonData.sort((a, b) => a.id - b.id);
-            setPokemon(pokemonData);
-
         })();
     }, [offset]);
 
     return (
         <div className='home-page'>
             <div className='griglia-box'>
-                {pokemon.map((p) =>
+                {list.map((p) =>
                     <Scheda
-                        key={p.id}
+                        key={p.url}
+                        url={p.url}
                         name={p.name}
-                        image={p.sprites.other["official-artwork"].front_default}
-                        types={p.types.map((type) => type.type.name)}
-                        number={p.id}
                     />
                 )}
             </div>
