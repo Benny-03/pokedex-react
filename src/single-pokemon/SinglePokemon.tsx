@@ -4,6 +4,7 @@ import backgroundColorType from '../typeBackground';
 import PointList from './PointList';
 import Characteristic from './Characteristic';
 
+
 //Fetch
 const fetchSinglePokemon = async (id) => {
     const response = await fetch('https://pokeapi.co/api/v2/pokemon/' + id);
@@ -147,7 +148,7 @@ const SinglePokemon = () => {
                         </div>
                         <div className="dettaglio">
                             <p>In detail</p>
-                            <PointList />
+                            <PointList info={info} />
                         </div>
                     </div>
 

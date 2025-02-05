@@ -1,18 +1,38 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
-const List = () => {
+const List = (props) => {
     const n = 26;
     let i = 0;
 
+    //console.log(props.name, props.point)
+    return (
+        <ul>
+            {Array.from({length: n}, (_, i) => (
+                <li key={i}></li>
+            ))}
+        </ul>
+    )
+
 }
 
-function PointList() {
+function PointList(props) {
+    const [point, setPoint] = useState();
+    
+    useEffect(() => {
+        (async () => {
+            console.log(props.info.stats);
+            const points = props.info.stats.map((s) => s.base_stat)
+            setPoint(points)
+        })();
+    }, []);
 
     return (
         <div className="table">
             <div className="statistiche">
-                <List />
-                <h6>{"HP (Health Point)"}</h6>
+                <List 
+                    
+                />
+                <h6>{"HP"}</h6>
             </div>
             <div className="statistiche">
                 <List />
