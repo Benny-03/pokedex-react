@@ -435,3 +435,74 @@ li {
 .table li.active {
     background-color: #1b82b1;
 }
+
+@media screen and (max-width: 1050px){
+    .table ul {
+        width: 60px;
+    }
+
+    .table {
+        gap: 5px;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    .box-info {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 150px;
+    }
+
+    .box-info .col-1, .box-info .col-2 {
+        width: 68%;
+    }
+
+    .table ul, .table h6 {
+        width: 60px;
+    }
+
+    #root {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .box-info .col-1, .box-info .col-2 {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .table ul, .table h6 {
+        width: 50px;
+    }
+
+    .table {
+        gap: 2px;
+    }
+
+    .box-info .col-1, .box-info .col-2 {
+        width: 100%;
+    }
+
+    .navigation {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .navigation .button {
+        width: 100%;
+    }
+
+    .button.back {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 380px){
+    .table ul, .table h6 {
+        width: 40px;
+    }
+
+}
+
