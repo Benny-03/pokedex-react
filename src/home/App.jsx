@@ -26,14 +26,14 @@ const Scheda = (props) => {
     }, [props.url]);
 
     if (!pokemon) {
-
-        return(<div className='scheda loading'>
-            <div className='immagine'>
+        return(
+            <div className='scheda loading'>
+                <div className='immagine'></div>
+                <div className='info wrapper'>
+                    <p id='name'>{props.name}</p>
+                </div>
             </div>
-            <div className='info wrapper'>
-                <p id='name'>{props.name}</p>
-            </div>
-        </div>)
+        )
     }
 
     return (

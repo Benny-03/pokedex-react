@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const List = (props) => {
-    const n = 26; // Math.round(props.point.base_stat / 10);
+    const n = 26; 
     let j = Math.round(props.point / 10);
-    const lines: Array<React.JSX.Element> = [];
+
+    const lines = [];
     for (let i = 0; i < n; i++) {
-        lines.push(<li key={i} style={{backgroundColor: i < j ? 'blue' : 'white'}} ></li>);
+        lines.push(<li key={i} style={{backgroundColor: i < j ? '#1b82b1' : 'white', borderColor: i < j ? '#1b82b1' : 'white'}} ></li>);
     }
 
-    //console.log(props.name, props.point)
     return (
         <ul>
             {lines}
@@ -18,35 +18,21 @@ const List = (props) => {
 }
 
 function PointList(props) {
-    const [point, setPoint] = useState();
-
-    useEffect(() => {
-        // console.log(props.info.stats);
-        // const points = props.info.stats.map((s) => s.base_stat)
-        // setPoint(points)
-    }, []);
-
     
-    if (!props.info || Array.isArray(props.info)) {
-        return null;
-    }
+    if (!props.info || Array.isArray(props.info)) return null;
 
-    if (!props.info.stats || !Array.isArray(props.info.stats)) {
-        return null;
-    }
+    if (!props.info.stats || !Array.isArray(props.info.stats)) return null;
     
     const points = props.info.stats.map((s) => s.base_stat);
 
     return (
         <div className="table">
             <div className="statistiche">
-                <List
-                    point={points[0]}
-                />
+                <List point={points[0]} />
                 <h6>{"HP"}</h6>
             </div>
             <div className="statistiche">
-                <List  point={points[1]} />
+                <List point={points[1]} />
                 <h6>Attack</h6>
             </div>
             <div className="statistiche">
@@ -67,14 +53,6 @@ function PointList(props) {
             </div>
         </div>
     )
-
 }
 
 export default PointList;
-
-// PS (Punti Salute): 255
-// Attacco: 181
-// Difesa: 250
-// Attacco Speciale: 181
-// Difesa Speciale: 230
-// Velocità: 200
