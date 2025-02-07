@@ -8,11 +8,11 @@ const root = createRoot(document.getElementById('root'));
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: "/pokedex-react/",
         Component: App
     },
     {
-        path: "/single-pokemon/:id",
+        path: "/pokedex-react/single-pokemon/:id",
         Component: SinglePokemon
     }
 ]);

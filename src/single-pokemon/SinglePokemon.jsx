@@ -55,10 +55,10 @@ const SinglePokemon = () => {
         <div className="content-single-pokemon" key={info.id}>
             <div className="single-pokemon">
                 <div className="navigation">
-                    <NavLink to={'/single-pokemon/' + prec} className='box-button prec'>
+                    <NavLink to={'/pokedex-react/single-pokemon/' + prec} className='box-button prec'>
                         <button className='button prec'>{"<"} Pokemon precedente</button>
                     </NavLink>
-                    <NavLink to={'/single-pokemon/' + succ} className='box-button succ'>
+                    <NavLink to={'/pokedex-react/single-pokemon/' + succ} className='box-button succ'>
                         <button className='button succ'>Pokemon successivo {">"}</button>
                     </NavLink>
                 </div>
@@ -91,7 +91,7 @@ const SinglePokemon = () => {
                         <Vulnerability info={info} />
                     </div>
                 </div>
-                <NavLink to={'/'} className='box-button back'>
+                <NavLink to={'/pokedex-react/'} className='box-button back'>
                     <button className='button back'>Cerca altri Pokemon</button>
                 </NavLink>
             </div>

@@ -37,7 +37,7 @@ const Scheda = (props) => {
     }
 
     return (
-        <NavLink to={'/single-pokemon/'+ pokemon.id } className='scheda'>
+        <NavLink to={'/pokedex-react/single-pokemon/'+ pokemon.id } className='scheda'>
             <div className='immagine'>
                 <img src={pokemon.sprites.other["official-artwork"].front_default} alt={props.name} />
             </div>
