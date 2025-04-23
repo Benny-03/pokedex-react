@@ -4,15 +4,16 @@ Segui le istruzioni per avere una copia del progetto  attiva e funzionante in lo
 
 ### Prerequisiti
 
-Avere installato Node.js, per verificarlo scrivere da terminale:
-```sh
-node --version
-```
+* Se è la prima volta che scarichi un progetto su GitHub, installare git su [https://git-scm.com](https://git-scm.com/downloads)
 
-Se non è installato, eseguire:
-```sh
-npm install npm@latest -g
-```
+* Avere installato Node.js e npm, per verificarlo scrivere da terminale:
+    ```sh node --v ``` e ```sh npm --v ```
+
+    Se non è installato, installarlo da [Node.js](https://nodejs.org/en/download)
+
+* Avere installato nvm, per verificarlo scrivere da terminale: ```sh nvm --v ```
+    Altrimenti, installarlo
+    
 
 ## Installazione
 
@@ -20,18 +21,16 @@ npm install npm@latest -g
     ```sh
     git clone https://github.com/Benny-03/pokedex-react.git
     ```
-    oppure tramite SSH:
-    ```sh
-    git clone git@github.com:Benny-03/pokedex-react.git
-    ```
+
 2. Entrare nel repository scaricato
     ```sh
     cd pokedex-react
     ```
+
 3. Usare la versione di node con cui è stato fatto il progetto:
-    ```sh
-    nvm use
-    ```
+    * Linux/MacOS: ```sh nvm use ```
+    * Windows: ```sh Get-Content .nvmrc ```
+    
 4. Installazione delle dipendenze
     ```sh
     npm install
