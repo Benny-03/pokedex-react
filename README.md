@@ -28,8 +28,8 @@ Segui le istruzioni per avere una copia del progetto  attiva e funzionante in lo
     ```
 
 3. Usare la versione di node con cui è stato fatto il progetto:
-    * Linux/MacOS: ```sh nvm use ```
-    * Windows: ```sh Get-Content .nvmrc ```
+    * Linux/MacOS: ``` nvm use ```
+    * Windows: ``` Get-Content .nvmrc ```
     
 4. Installazione delle dipendenze
     ```sh
